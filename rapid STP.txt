@@ -1,0 +1,89 @@
+rapid STP
+
+
+Cau hinh sw-core-1
+spanning-tree mode rapid
+spanning-tree vlan 1 root primary
+spanning-tree vlan 2 root primary
+spanning-tree vlan 3 root primary
+spanning-tree vlan 4 root primary
+spanning-tree vlan 5 root primary
+spanning-tree vlan 6 root secondary
+spanning-tree vlan 7 root secondary
+spanning-tree vlan 8 root secondary
+spanning-tree vlan 9 root secondary
+spanning-tree vlan 10 root secondary
+end 
+write
+
+Cau hinh sw-core-2
+spanning-tree mode rapid
+spanning-tree vlan 6 root primary
+spanning-tree vlan 7 root primary
+spanning-tree vlan 8 root primary
+spanning-tree vlan 9 root primary
+spanning-tree vlan 10 root primary
+spanning-tree vlan 1 root secondary
+spanning-tree vlan 2 root secondary
+spanning-tree vlan 3 root secondary
+spanning-tree vlan 4 root secondary
+spanning-tree vlan 5 root secondary
+end 
+write
+
+
+cau hinh sw-0
+spanning-tree mode rapid
+int range f0/1-2
+spanning-tree portfast trunk
+spanning-tree bpduguard enable
+exit	
+
+int f0/3
+spanning-tree portfast
+spanning-tree bpduguard enable
+end 
+write
+
+
+cau hinh sw-1
+spanning-tree mode rapid
+int range f0/2-3
+spanning-tree portfast 
+spanning-tree bpduguard enable
+exit	
+
+int f0/1
+spanning-tree portfast trunk
+spanning-tree bpduguard enable
+end 
+write
+
+cau hinh sw-2
+int f0/1
+spanning-tree portfast trunk
+spanning-tree bpduguard enable
+end 
+write
+
+cau hinh sw-3
+int f0/1
+spanning-tree portfast trunk
+spanning-tree bpduguard enable
+end 
+write
+
+cau hinh sw-4
+int f0/1
+spanning-tree portfast trunk
+spanning-tree bpduguard enable
+end 
+write
+
+
+cau hinh sw-5
+int f0/1
+spanning-tree portfast trunk
+spanning-tree bpduguard enable
+end 
+write

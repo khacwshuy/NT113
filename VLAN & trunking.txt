@@ -1,0 +1,255 @@
+VLAN & trunking
+cấu hình  sw-core-1
+hostname SW-Core-1
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int range gi1/0/1-6
+	sw mode trunk
+	end
+wr
+
+cấu hình core 2
+hostname SW-Core-2
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int range gi1/0/1-6
+	sw mode trunk
+	end
+wr
+
+
+
+cấu hình SW-0
+hostname SW-0
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int f0/3
+	sw access vlan 2
+	exit
+int range f0/1-2
+	sw mode trunk
+	exit
+int range g0/1-2
+	sw mode trunk
+	end
+wr
+
+cấu hình SW-1
+hostname SW-1
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int f0/2
+	sw access vlan 5
+	exit
+int f0/3
+	sw access vlan 3
+	exit
+int f0/1
+	sw mode trunk
+	exit
+int range G0/1-2
+	sw mode trunk
+	end
+wr
+
+
+cấu hình SW-2
+hostname SW-2
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int f0/1
+	sw mode trunk
+	exit
+int range G0/1-2
+	sw mode trunk
+	end
+wr
+
+cấu hình SW-3
+hostname SW-3
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int f0/1
+	sw mode trunk
+	exit
+int range G0/1-2
+	sw mode trunk
+	end
+wr
+
+
+cấu hình SW-4
+hostname SW-4
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int f0/1
+	sw mode trunk
+	exit
+int range G0/1-2
+	sw mode trunk
+	end
+wr
+
+cấu hình SW-5
+hostname SW-5
+vlan 1
+name WifiPublic
+vlan 2
+name DataCenter
+vlan 3
+name Developer
+vlan 4
+name ProjectManager
+vlan 5
+name Tester
+vlan 6
+name BusinessAnalyst
+vlan 7
+name HumanResources
+vlan 8
+name ITManager
+vlan 9
+name TechnicalManager
+vlan 10
+name CEO
+exit
+int f0/1
+	sw mode trunk
+	exit
+int range G0/1-2
+	sw mode trunk
+	end
+wr
