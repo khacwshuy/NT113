@@ -42,17 +42,15 @@ int vlan 10
 	ip add 172.20.3.65 255.255.255.248
 	no shut
 	exit
-int g1/0/9
+int g0/1
 	no switchport
-	ip add 172.21.1.2 255.255.255.0
+	ip add 172.21.0.2 255.255.255.0
 	no shut
 	exit
-int range g1/0/7-8
-	no
+int range f0/7-8
 	channel-group 1 mode active
 	exit
 int po1
-	no switchport
 	ip add 172.21.12.1 255.255.255.0
 	no shut
 	end
@@ -99,12 +97,12 @@ int vlan 10
 	ip add 172.20.3.66 255.255.255.248
 	no shut
 	exit
-int g1/0/9
+int g0/1
 	no switchport
-	ip add 172.22.1.2 255.255.255.0
+	ip add 172.21.1.2 255.255.255.0
 	no shut
 	exit
-int range g1/0/7-8
+int range f0/7-8
 	no switchport
 	channel-group 1 mode active
 	exit
@@ -115,32 +113,5 @@ int po1
 	end
 write
 	
-
-
-cau hinh router1
-hostname Router-1
-int G0/0/0
-	ip add 172.21.1.1 255.255.255.0
-	no shut 
-	exit
-int s0/1/0
-	ip add 10.0.0.1 255.0.0.0
-	no shut
-	end
-write
-	
-
-cau hinh router2
-hostname Router-2
-int G0/0/0
-	ip add 172.22.1.1 255.255.255.0
-	no shut 
-	exit
-int s0/1/0
-	ip add 20.0.0.1 255.0.0.0
-	no shut
-	end
-write
-
 	
 

@@ -60,6 +60,7 @@ end
 write
 
 cau hinh sw-2
+spanning-tree mode rapid
 int f0/1
 spanning-tree portfast trunk
 spanning-tree bpduguard enable
@@ -67,6 +68,7 @@ end
 write
 
 cau hinh sw-3
+spanning-tree mode rapid
 int f0/1
 spanning-tree portfast trunk
 spanning-tree bpduguard enable
