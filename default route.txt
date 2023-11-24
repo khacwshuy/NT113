@@ -1,0 +1,7 @@
+cau hinh tren router 0 va 1
+
+default-information originate dùng để quảng bá ospf đến core 1 và 2
+
+ip route 0.0.0.0 0.0.0.0 s0/1/0
+router ospf 1
+default-information originate

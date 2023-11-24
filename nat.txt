@@ -1,0 +1,9 @@
+cau hinh tren 2 router 0 va 1
+int range g0/0/0-1
+	ip nat inside
+	exit
+int s0/1/0
+	ip nat outside
+	exit
+access-list 1 permit any
+ip nat inside source list 1 int s0/1/0 overload

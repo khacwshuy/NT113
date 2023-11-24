@@ -44,12 +44,12 @@ int vlan 10
 	exit
 int g1/0/7
 	no switchport
-	ip add 172.21.0.3 255.255.255.0
+	ip add 172.21.0.2 255.255.255.0
 	no shut
 	exit
 int g1/0/8
 	no switchport
-	ip add 172.21.0.4 255.255.255.0
+	ip add 172.22.0.2 255.255.255.0
 	no shut
 	end
 write
@@ -97,14 +97,105 @@ int vlan 10
 	exit
 int g1/0/7
 	no switchport
-	ip add 172.22.0.3 255.255.255.0
+	ip add 172.23.0.2 255.255.255.0
 	no shut
 	exit
 int g1/0/8
 	no switchport
-	ip add 172.22.0.4 255.255.255.0
+	ip add 172.24.0.2 255.255.255.0
 	no shut
 	end
 write	
 	
 
+
+
+cấu hình ISP
+int s0/1/0
+	ip add 10.0.0.1 255.0.0.0
+	no shut
+	exit
+
+int s0/1/1
+	ip add 20.0.0.1 255.0.0.0
+	no shut
+	exit
+int loopback 0
+	ip add 8.8.8.8 255.255.255.255
+end
+wr
+
+
+cấu hình router0
+
+hostname R0
+
+int g0/0/0
+	ip add 172.21.0.1 255.255.255.0
+	no shut
+	exit
+
+int g0/0/1
+	ip add 172.22.0.1 255.255.255.0
+	no shut
+	exit
+int s0/1/0
+	ip add 10.0.0.2 255.0.0.0
+	no shut
+	exit
+end
+wr
+
+
+cấu hình R1
+
+hostname R1
+
+int g0/0/0
+	ip add 172.23.0.1 255.255.255.0
+	no shut
+	exit
+
+int g0/0/1
+	ip add 172.24.0.1 255.255.255.0
+	no shut
+	exit
+int s0/1/0
+	ip add 20.0.0.2 255.0.0.0
+	no shut
+	exit
+end
+wr
+
+
+cau hinh relay agent core 1 va core 2
+int vlan 1
+	ip helper-address 172.20.0.10
+	exit
+int vlan 2
+	ip helper-address 172.20.0.10
+	exit
+int vlan 3
+	ip helper-address 172.20.0.10
+	exit
+int vlan 4
+	ip helper-address 172.20.0.10
+	exit
+int vlan 5
+	ip helper-address 172.20.0.10
+	exit
+int vlan 6
+	ip helper-address 172.20.0.10
+	exit
+int vlan 7
+	ip helper-address 172.20.0.10
+	exit
+int vlan 8
+	ip helper-address 172.20.0.10
+	exit
+int vlan 9
+	ip helper-address 172.20.0.10
+	exit
+int vlan 10
+	ip helper-address 172.20.0.10
+	exit

@@ -1,0 +1,23 @@
+cau hinh router 1 va 2
+
+router ospf 1
+	network 172.0.0.0 0.255.255.255 area 0
+	end
+wr
+
+cau hinh core 1 va 2
+ip routing
+router ospf 1
+	network 172.0.0.0 0.255.255.255 area 0
+	passive-interface vlan 1
+	passive-interface vlan 2
+	passive-interface vlan 3
+	passive-interface vlan 4
+	passive-interface vlan 5
+	passive-interface vlan 6
+	passive-interface vlan 7
+	passive-interface vlan 8
+	passive-interface vlan 9
+	passive-interface vlan 10
+	end
+wr

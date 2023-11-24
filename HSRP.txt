@@ -1,0 +1,102 @@
+cau hinh core 1
+
+int vlan 1
+	standby 1 ip 172.20.0.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 2
+	standby 1 ip 172.20.10.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 3
+	standby 1 ip 172.20.20.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 4
+	standby 1 ip 172.20.30.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 5
+	standby 1 ip 172.20.40.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 6
+	standby 1 ip 172.20.50.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 7
+	standby 1 ip 172.20.60.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 8
+	standby 1 ip 172.20.70.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 9
+	standby 1 ip 172.20.80.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 10
+	standby 1 ip 172.20.90.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+end
+wr
+
+
+
+
+cau hinh core 2
+
+int vlan 1
+	standby 1 ip 172.20.0.3
+	standby 1 preempt
+	exit
+int vlan 2
+	standby 1 ip 172.20.10.3
+	standby 1 preempt
+	exit
+int vlan 3
+	standby 1 ip 172.20.20.3
+	standby 1 preempt
+	exit
+int vlan 4
+	standby 1 ip 172.20.30.3
+	standby 1 preempt
+	exit
+int vlan 5
+	standby 1 ip 172.20.40.3
+	standby 1 preempt
+	exit
+int vlan 6
+	standby 1 ip 172.20.50.3
+	standby 1 preempt
+	exit
+int vlan 7
+	standby 1 ip 172.20.60.3
+	standby 1 preempt
+	exit
+int vlan 8
+	standby 1 ip 172.20.70.3
+	standby 1 preempt
+	exit
+int vlan 9
+	standby 1 ip 172.20.80.3
+	standby 1 preempt
+	exit
+int vlan 10
+	standby 1 ip 172.20.90.3
+	standby 1 preempt
+	exit
+end
+wr
