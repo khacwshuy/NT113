@@ -3,115 +3,108 @@ IP
 
 cau hinh sw-core-1
 int vlan 1	
-	ip add 172.20.0.1 255.255.254.0
+	ip add 172.20.0.1 255.255.255.0
 	no shut
 	exit
 int vlan 2	
-	ip add 172.20.2.1 255.255.255.128
+	ip add 172.20.10.1 255.255.255.0
 	no shut
 	exit
 int vlan 3	
-	ip add 172.20.2.129 255.255.255.192
+	ip add 172.20.20.1 255.255.255.0
 	no shut
 	exit
 int vlan 4	
-	ip add 172.20.2.193 255.255.255.224
+	ip add 172.20.30.1 255.255.255.0
 	no shut
 	exit
 int vlan 5	
-	ip add 172.20.2.225 255.255.255.224
+	ip add 172.20.40.1 255.255.255.0
 	no shut
 	exit
 int vlan 6	
-	ip add 172.20.3.1 255.255.255.240
+	ip add 172.20.50.1 255.255.255.0
 	no shut
 	exit
 int vlan 7	
-	ip add 172.20.3.17 255.255.255.240
+	ip add 172.20.60.1 255.255.255.0
 	no shut
 	exit
 int vlan 8	
-	ip add 172.20.3.33 255.255.255.240
+	ip add 172.20.70.1 255.255.255.0
 	no shut
 	exit
 int vlan 9	
-	ip add 172.20.3.49 255.255.255.240
+	ip add 172.20.80.1 255.255.255.0
 	no shut
 	exit
 int vlan 10	
-	ip add 172.20.3.65 255.255.255.248
+	ip add 172.20.90.1 255.255.255.0
 	no shut
 	exit
-int g0/1
+int g1/0/7
 	no switchport
-	ip add 172.21.0.2 255.255.255.0
+	ip add 172.21.0.3 255.255.255.0
 	no shut
 	exit
-int range f0/7-8
-	channel-group 1 mode active
-	exit
-int po1
-	ip add 172.21.12.1 255.255.255.0
+int g1/0/8
+	no switchport
+	ip add 172.21.0.4 255.255.255.0
 	no shut
 	end
 write
 
 cau hinh sw-core-2
 int vlan 1	
-	ip add 172.20.0.2 255.255.254.0
+	ip add 172.20.0.1 255.255.255.0
 	no shut
 	exit
 int vlan 2	
-	ip add 172.20.2.2 255.255.255.128
+	ip add 172.20.10.1 255.255.255.0
 	no shut
 	exit
 int vlan 3	
-	ip add 172.20.2.130 255.255.255.192
+	ip add 172.20.20.1 255.255.255.0
 	no shut
 	exit
 int vlan 4	
-	ip add 172.20.2.194 255.255.255.224
+	ip add 172.20.30.1 255.255.255.0
 	no shut
 	exit
 int vlan 5	
-	ip add 172.20.2.226 255.255.255.224
+	ip add 172.20.40.1 255.255.255.0
 	no shut
 	exit
 int vlan 6	
-	ip add 172.20.3.2 255.255.255.240
+	ip add 172.20.50.1 255.255.255.0
 	no shut
 	exit
 int vlan 7	
-	ip add 172.20.3.18 255.255.255.240
+	ip add 172.20.60.1 255.255.255.0
 	no shut
 	exit
 int vlan 8	
-	ip add 172.20.3.34 255.255.255.240
+	ip add 172.20.70.1 255.255.255.0
 	no shut
 	exit
 int vlan 9	
-	ip add 172.20.3.50 255.255.255.240
+	ip add 172.20.80.1 255.255.255.0
 	no shut
 	exit
 int vlan 10	
-	ip add 172.20.3.66 255.255.255.248
+	ip add 172.20.90.1 255.255.255.0
 	no shut
 	exit
-int g0/1
+int g1/0/7
 	no switchport
-	ip add 172.21.1.2 255.255.255.0
+	ip add 172.22.0.3 255.255.255.0
 	no shut
 	exit
-int range f0/7-8
+int g1/0/8
 	no switchport
-	channel-group 1 mode active
-	exit
-int po1
-	no switchport
-	ip add 172.21.12.2 255.255.255.0
+	ip add 172.22.0.4 255.255.255.0
 	no shut
 	end
-write
-	
+write	
 	
 

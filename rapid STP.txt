@@ -8,21 +8,21 @@ spanning-tree vlan 2 root primary
 spanning-tree vlan 3 root primary
 spanning-tree vlan 4 root primary
 spanning-tree vlan 5 root primary
-spanning-tree vlan 6 root secondary
-spanning-tree vlan 7 root secondary
-spanning-tree vlan 8 root secondary
-spanning-tree vlan 9 root secondary
-spanning-tree vlan 10 root secondary
-end 
-write
-
-Cau hinh sw-core-2
-spanning-tree mode rapid
 spanning-tree vlan 6 root primary
 spanning-tree vlan 7 root primary
 spanning-tree vlan 8 root primary
 spanning-tree vlan 9 root primary
 spanning-tree vlan 10 root primary
+end 
+write
+
+Cau hinh sw-core-2
+spanning-tree mode rapid
+spanning-tree vlan 6 root secondary
+spanning-tree vlan 7 root secondary
+spanning-tree vlan 8 root secondary
+spanning-tree vlan 9 root secondary
+spanning-tree vlan 10 root secondary
 spanning-tree vlan 1 root secondary
 spanning-tree vlan 2 root secondary
 spanning-tree vlan 3 root secondary
