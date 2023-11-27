@@ -360,19 +360,28 @@ cau hinh DHCP
 tren sw-core-3, sw-core-4
 ip dhcp pool Lan1
 network 172.20.100.0 255.255.255.0
-default-router 172.20.100.1
+default-router 172.20.100.3
+
 
 ip dhcp pool Lan2
 network 172.20.110.0 255.255.255.0
-default-router 172.20.110.1
+default-router 172.20.110.3
+
 
 ip dhcp pool Lan3
 network 172.20.120.0 255.255.255.0
-default-router 172.20.120.1
+default-router 172.20.120.3
+
 
 ip dhcp pool Lan4
 network 172.20.130.0 255.255.255.0
-default-router 172.20.130.1
+default-router 172.20.130.3
+
+ip dhcp excluded-address 172.20.100.1 172.20.100.3
+ip dhcp excluded-address 172.20.110.1 172.20.110.3
+ip dhcp excluded-address 172.20.120.1 172.20.120.3
+ip dhcp excluded-address 172.20.130.1 172.20.130.3
+ip dhcp excluded-address 172.20.100.100
 
 ================================
 wifi
