@@ -1,0 +1,380 @@
+Chi nhánh: 
+
+==========================================
+*Vlan and trunking:
+----------------------
+hostname SW-Core-3
+vlan 1
+name Wireless-Manager
+vlan 2
+name Developer
+vlan 3
+name Tester
+vlan 4
+name Wifi-Public
+exit
+int range gi1/0/3-6
+	sw mode trunk
+	end
+wr
+----------------------
+hostname SW-Core-4
+vlan 1
+name Wireless-Manager
+vlan 2
+name Developer
+vlan 3
+name Tester
+vlan 4
+name Wifi-Public
+exit
+int range gi1/0/3-6
+	sw mode trunk
+	end
+wr
+----------------------
+hostname SW-LWAP
+vlan 1
+name Wireless-Manager
+vlan 2
+name Developer
+vlan 3
+name Tester
+vlan 4
+name Wifi-Public
+exit
+int range gi0/1-2
+	sw mode trunk
+	exit
+int range f0/1
+	sw mode trunk
+	end
+wr
+----------------------
+hostname SW-Tester
+vlan 1
+name Wireless-Manager
+vlan 2
+name Developer
+vlan 3
+name Tester
+vlan 4
+name Wifi-Public
+exit
+int range gi0/1-2
+	sw mode trunk
+	exit
+int range f0/1
+	sw access vlan 3
+	end
+wr
+--------------------------
+hostname SW-Developer
+vlan 1
+name Wireless-Manager
+vlan 2
+name Developer
+vlan 3
+name Tester
+vlan 4
+name Wifi-Public
+exit
+int range gi0/1-2
+	sw mode trunk
+	exit
+int range f0/1
+	sw access vlan 2
+	end
+wr
+---------------------------
+hostname SW-WCL
+vlan 1
+name Wireless-Manager
+vlan 2
+name Developer
+vlan 3
+name Tester
+vlan 4
+name Wifi-Public
+exit
+int range gi0/1-2
+	sw mode trunk
+	exit
+int range f0/1
+	sw mode trunk
+wr
+==========================================
+
+*Rapid STP
+Cau hinh sw-core-3
+	spanning-tree mode rapid
+	spanning-tree vlan 1 root primary
+	spanning-tree vlan 2 root primary
+	spanning-tree vlan 3 root secondary
+	spanning-tree vlan 4 root secondary
+	end 
+	write
+--------------------------------------------
+Cau hinh sw-core-4
+	spanning-tree mode rapid
+	spanning-tree vlan 1 root secondary
+	spanning-tree vlan 2 root secondary
+	spanning-tree vlan 3 root primary
+	spanning-tree vlan 4 root primary
+	end 
+	write
+---------------------------------------------
+cau hinh sw-LWAP
+	spanning-tree mode rapid
+	int f0/1
+	spanning-tree portfast trunk
+	spanning-tree bpduguard enable	
+	end
+	write
+cau hinh sw-Tester
+	spanning-tree mode rapid
+	int f0/1
+	spanning-tree portfast 
+	spanning-tree bpduguard enable
+	end	
+	write
+
+cau hinh sw-Developer
+	spanning-tree mode rapid
+	int f0/1
+	spanning-tree portfast 
+	spanning-tree bpduguard enable
+	end	
+	write
+--------------------------------------------
+cau hinh sw-WCL
+	spanning-tree mode rapid
+	int f0/1
+	spanning-tree portfast trunk
+	spanning-tree bpduguard enable
+	end	
+	write
+========================================
+CẤU HÌNH ĐỊA CHỈ IP
+
+cau hinh sw-core-3
+int vlan 1	
+	ip add 172.20.100.1 255.255.255.0
+	no shut
+	exit
+int vlan 2	
+	ip add 172.20.110.1 255.255.255.0
+	no shut
+	exit
+int vlan 3	
+	ip add 172.20.120.1 255.255.255.0
+	no shut
+	exit
+int vlan 4
+	ip add 172.20.130.1 255.255.255.0
+	no shut
+	exit
+int gi1/0/1
+	no switchport
+	ip add 172.25.0.1 255.255.255.0
+	no shut
+	exit
+
+int gi1/0/2
+	no switchport
+	ip add 172.26.0.1 255.255.255.0
+	no shut
+	end
+write
+
+---------------------------------------------------
+cau hinh sw-core-4
+int vlan 1	
+	ip add 172.20.100.1 255.255.255.0
+	no shut
+	exit
+int vlan 2	
+	ip add 172.20.110.1 255.255.255.0
+	no shut
+	exit
+int vlan 3	
+	ip add 172.20.120.1 255.255.255.0
+	no shut
+	exit
+int vlan 4
+	ip add 172.20.130.1 255.255.255.0
+	no shut
+	exit
+int gi1/0/1
+	no switchport
+	ip add 172.27.0.1 255.255.255.0
+	no shut
+	exit
+
+int gi1/0/2
+	no switchport
+	ip add 172.28.0.1 255.255.255.0
+	no shut
+	end
+write
+---------------------------------------
+cấu hình ISP
+int s0/2/0
+	ip add 30.0.0.1 255.0.0.0
+	no shut
+	exit
+
+int s0/2/1
+	ip add 40.0.0.1 255.0.0.0
+	no shut
+	end
+write
+--------------------------------------
+cấu hình cho R2
+int g0/0/0
+	ip add 172.25.0.2 255.255.255.0
+	no shut
+	exit
+
+int g0/0/1
+	ip add 172.27.0.2 255.255.255.0
+	no shut
+	exit
+int s0/1/0
+	ip add 30.0.0.2 255.0.0.0
+	no shut
+	exit
+end
+wr
+--------------------------------------
+cấu hình cho R3
+int g0/0/0
+	ip add 172.26.0.2 255.255.255.0
+	no shut
+	exit
+
+int g0/0/1
+	ip add 172.28.0.2 255.255.255.0
+	no shut
+	exit
+int s0/1/0
+	ip add 40.0.0.2 255.0.0.0
+	no shut
+	exit
+end
+wr
+
+
+============================
+*cấu hình ospf
+cau hinh R2 va R3
+	router ospf 1
+	network 172.0.0.0 0.255.255.255 area 0
+	end
+	write
+
+cau hinh core 1 va 2
+	ip routing
+	router ospf 1
+	network 172.0.0.0 0.255.255.255 area 0
+	passive-interface vlan 1
+	passive-interface vlan 2
+	passive-interface vlan 3
+	passive-interface vlan 4
+	end
+	write
+
+=============================================
+ Cấu hình HSRP:
+trên sw-core3
+int vlan 1
+	standby 1 ip 172.20.100.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 2
+	standby 1 ip 172.20.110.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 3
+	standby 1 ip 172.20.120.3
+	standby 1 preempt
+	exit
+int vlan 4
+	standby 1 ip 172.20.130.3
+	standby 1 preempt
+	exit
+
+trên sw-core 4
+int vlan 1
+	standby 1 ip 172.20.100.3
+	standby 1 preempt
+	exit
+int vlan 2
+	standby 1 ip 172.20.110.3
+	standby 1 preempt
+	exit
+int vlan 3
+	standby 1 ip 172.20.120.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+int vlan 4
+	standby 1 ip 172.20.130.3
+	standby 1 priority 105
+	standby 1 preempt
+	exit
+
+
+==========================================
+default route
+
+treen R2: 
+ip route 0.0.0.0 0.0.0.0 s0/1/0
+router ospf 1
+default-information originate
+
+
+treen R3: 
+ip route 0.0.0.0 0.0.0.0 s0/1/0
+router ospf 1
+default-information originate
+
+========================================
+cấu hình nat 
+
+cau hinh tren 2 router R2 va R3
+int range g0/0/0-1
+	ip nat inside
+	exit
+int s0/1/0
+	ip nat outside
+	exit
+access-list 1 permit any
+ip nat inside source list 1 int s0/1/0 overload
+==============================================
+
+cau hinh DHCP
+
+tren sw-core-3, sw-core-4
+ip dhcp pool Lan1
+network 172.20.100.0 255.255.255.0
+default-router 172.20.100.1
+
+ip dhcp pool Lan2
+network 172.20.110.0 255.255.255.0
+default-router 172.20.110.1
+
+ip dhcp pool Lan3
+network 172.20.120.0 255.255.255.0
+default-router 172.20.120.1
+
+ip dhcp pool Lan4
+network 172.20.130.0 255.255.255.0
+default-router 172.20.130.1
+
+================================
+wifi
+Admin mk: gioongs been tru so
+
