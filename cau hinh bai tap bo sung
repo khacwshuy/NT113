@@ -1,0 +1,221 @@
+===========================
+vlan trunking
+
+
+vlan
+cau hinh sw-core-1
+hostname SW-core-1
+vlan 1 
+name manage
+vlan 10
+name VLAN-Student
+vlan 20
+name VLAN-Guest
+vlan 30
+name VLAN-Camera
+exit
+
+int range gi1/0/1-2
+sw mode trunk
+end
+write
+
+
+
+
+
+
+cau sw-access 1
+
+
+hostname SW-Access-1
+vlan 1 
+name manage
+vlan 10
+name VLAN-Student
+vlan 20
+name VLAN-Guest
+vlan 30
+name VLAN-Camera
+exit
+
+int range f0/1-4
+sw mode trunk
+int g0/1
+sw mode trunk
+end 
+wr
+
+
+
+
+
+
+cau sw-access 2
+hostname SW-Access-2
+vlan 1 
+name manage
+vlan 10
+name VLAN-Student
+vlan 20
+name VLAN-Guest
+vlan 30
+name VLAN-Camera
+exit
+
+int range f0/1-3
+sw mode trunk
+int g0/1
+sw mode trunk
+end
+write
+
+
+
+====================================
+ip
+
+sw-core
+int vlan 1
+ip add 10.0.0.1 255.0.0.0
+no shut
+exit
+
+int vlan 10
+ip add 20.0.0.1 255.0.0.0
+no shut
+exit
+
+int vlan 20
+ip add 30.0.0.1 255.0.0.0
+no shut
+exit
+
+int vlan 30
+ip add 40.0.0.1 255.0.0.0
+no shut
+exit
+
+
+int g1/0/3
+no switchport
+ip add 50.0.0.2 255.255.255.0
+no shut
+
+end 
+wr
+
+
+router
+hostname router 
+
+int g0/0/0
+ip add 50.0.0.1 255.255.255.0
+no shut
+end write
+
+
+int s0/1/0
+ip add 8.0.0.1 255.255.255.0
+no shut
+end 
+write
+
+
+isp
+hostname Internet
+int s0/1/0
+ip add 8.0.0.2 255.255.255.0
+no shut
+exit
+int loopback 0
+ip add 8.8.8.8 255.255.255.255
+end
+wr
+===============
+dhcp
+
+
+sw-core 1
+
+
+ip dhcp excluded-address 10.0.0.1
+ip dhcp excluded-address 10.0.0.10
+ip dhcp excluded-address 20.0.0.1
+ip dhcp excluded-address 30.0.0.1
+ip dhcp excluded-address 40.0.0.1
+
+
+ip dhcp pool 10
+network 10.0.0.0 255.0.0.0
+default-router 10.0.0.1
+
+ip dhcp pool 20
+network 20.0.0.0 255.0.0.0
+default-router 20.0.0.1
+
+ip dhcp pool 30
+network 30.0.0.0 255.0.0.0
+default-router 30.0.0.1
+
+ip dhcp pool 40
+network 40.0.0.0 255.0.0.0
+default-router 40.0.0.1
+
+
+================
+ospf
+
+
+
+router 
+
+router ospf 1
+network 50.0.0.0 0.0.0.255 area 0
+end
+wr
+
+
+sw-core-1
+
+
+router ospf 1
+network 10.0.0.0 0.255.255.255 area 0
+network 20.0.0.0 0.255.255.255 area 0
+network 30.0.0.0 0.255.255.255 area 0
+network 40.0.0.0 0.255.255.255 area 0
+network 50.0.0.0 0.0.0.255 area 0
+passive-interface vlan 1
+passive-interface vlan 10
+passive-interface vlan 20
+passive-interface vlan 30
+passive-interface vlan 40
+end wr
+
+
+
+============================
+default route
+
+
+
+ip route 0.0.0.0 0.0.0.0 s0/1/0
+router ospf 1
+default-information originate
+
+
+
+===========================
+Nat
+
+
+int g0/0/0
+ip nat inside 
+exit
+
+int s0/1/0
+ip nat outside
+exit
+
+access-list 1 permit any 
+ip nat inside source list 1 int s0/1/0 overload
