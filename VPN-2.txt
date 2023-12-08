@@ -1,0 +1,109 @@
+VPN-2
+
+VPN site to site R0 - R2
+trên R0
+interface tunnel 1
+ip address 172.20.140.1 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 30.0.0.2
+tunnel mode gre ip
+
+
+ip route 172.20.120.0 255.255.255.0 172.20.140.2 
+ip route 172.20.110.0 255.255.255.0 172.20.140.2
+ip route 172.25.0.0 255.255.255.0 172.20.140.2
+ip route 172.26.0.0 255.255.255.0 172.20.140.2
+
+
+Trên R2
+interface tunnel 1
+ip address 172.20.140.2 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 10.0.0.2
+tunnel mode gre ip
+
+chỉ cho phép đến server
+ip route 172.20.0.10 255.255.255.255 172.20.140.1
+ip route 172.21.0.0 255.255.255.0 172.20.140.1
+ip route 172.22.0.0 255.255.255.0 172.20.140.1
+
+//////////////////////////////////////////////////////
+
+VPN site to site R0 - R3
+trên R0
+interface tunnel 2
+ip address 172.20.141.1 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 40.0.0.2
+tunnel mode gre ip
+
+ip route 172.20.120.0 255.255.255.0 172.20.141.2 
+ip route 172.20.110.0 255.255.255.0 172.20.141.2
+ip route 172.25.0.0 255.255.255.0 172.20.141.2
+ip route 172.26.0.0 255.255.255.0 172.20.141.2
+
+trên R3
+interface tunnel 2
+ip address 172.20.141.2 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 10.0.0.2
+tunnel mode gre ip
+
+chỉ cho phép đến server
+ip route 172.20.0.10 255.255.255.255 172.20.141.1
+ip route 172.21.0.0 255.255.255.0 172.20.141.1
+ip route 172.22.0.0 255.255.255.0 172.20.141.1
+
+//////////////////////////////////////////////////////
+
+VPN site to site R1 - R2
+trên R1
+interface tunnel 3
+ip address 172.20.142.1 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 30.0.0.2
+tunnel mode gre ip
+
+ip route 172.20.120.0 255.255.255.0 172.20.142.2 
+ip route 172.20.110.0 255.255.255.0 172.20.142.2
+ip route 172.25.0.0 255.255.255.0 172.20.142.2
+ip route 172.26.0.0 255.255.255.0 172.20.142.2
+
+trên R2
+interface tunnel 3
+ip address 172.20.142.2 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 20.0.0.2
+tunnel mode gre ip
+
+//chỉ cho phép đến server
+ip route 172.20.0.10 255.255.255.255 172.20.142.1
+ip route 172.21.0.0 255.255.255.0 172.20.142.1
+ip route 172.22.0.0 255.255.255.0 172.20.142.1
+
+//////////////////////////////////////////////////////
+
+VPN site to site R1 - R3
+trên R1
+interface tunnel 4
+ip address 172.20.143.1 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 40.0.0.2
+tunnel mode gre ip
+
+ip route 172.20.120.0 255.255.255.0 172.20.143.2 
+ip route 172.20.110.0 255.255.255.0 172.20.143.2
+ip route 172.25.0.0 255.255.255.0 172.20.143.2
+ip route 172.26.0.0 255.255.255.0 172.20.143.2
+
+trên R3
+interface tunnel 4
+ip address 172.20.143.2 255.255.255.0
+tunnel source s0/1/0
+tunnel destination 20.0.0.2
+tunnel mode gre ip
+
+chỉ cho phép đến server
+ip route 172.20.0.10 255.255.255.255 172.20.143.1
+ip route 172.21.0.0 255.255.255.0 172.20.143.1
+ip route 172.22.0.0 255.255.255.0 172.20.143.1
