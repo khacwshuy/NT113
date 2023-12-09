@@ -19,7 +19,7 @@ Trên R2
 interface tunnel 1
 ip address 172.20.140.2 255.255.255.0
 tunnel source s0/1/0
-tunnel destination 10.0.0.2
+tunnel destination 50.0.0.2
 tunnel mode gre ip
 
 chỉ cho phép đến server
@@ -46,7 +46,7 @@ trên R3
 interface tunnel 2
 ip address 172.20.141.2 255.255.255.0
 tunnel source s0/1/0
-tunnel destination 10.0.0.2
+tunnel destination 50.0.0.2
 tunnel mode gre ip
 
 chỉ cho phép đến server

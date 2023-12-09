@@ -1,0 +1,62 @@
+========================phân tích=======================
+các vlan được truy cập server
+	vlan1 management
+	vlan3 developer
+	vlan5 tester
+	vlan9 TechnicalManager
+	ip 172.20.120.0 0.0.0.255 mang cua tester q3
+	ip 172.20.110.0 0.0.0.255 mang cua devloper q3
+các vlan kh được truy cập đến server
+	deny all
+các vlan kh được giao tiếp với vlan1
+	vlan2-9
+chặn guest đến mạng internel
+permit any
+=========================thực hiện=======================
+=============tren core 1----core 2========================
+ip access-list extended ACL1
+
+permit ip 172.20.20.0 0.0.0.255 172.20.0.0 0.0.0.255
+permit ip 172.20.40.0 0.0.0.255 172.20.0.0 0.0.0.255
+permit ip 172.20.80.0 0.0.0.255 172.20.0.0 0.0.0.255
+permit ip 172.20.120.0 0.0.0.255 172.20.0.0 0.0.0.255
+permit ip 172.20.110.0 0.0.0.255 172.20.0.0 0.0.0.255
+deny ip any 172.20.0.0 0.0.0.255
+deny ip 172.20.10.0 0.0.0.255 172.0.0.0 0.255.255.255
+permit ip any any
+exit
+int vlan 1
+	ip access-group ACL1 in
+	exit
+int vlan 2
+	ip access-group ACL1 in
+	exit
+int vlan 3
+	ip access-group ACL1 in
+	exit
+int vlan 4
+	ip access-group ACL1 in
+	exit
+int vlan 5
+	ip access-group ACL1 in
+	exit
+int vlan 6
+	ip access-group ACL1 in
+	exit
+int vlan 7
+	ip access-group ACL1 in
+	exit
+int vlan 8
+	ip access-group ACL1 in
+	exit
+int vlan 9
+	ip access-group ACL1 in
+	exit
+int vlan 10
+	ip access-group ACL1 in
+	exit
+	end
+	wr
+=============================kiểm tra======================
+trên guest ping server
+trên guest ping bất cứ vlan nào trong mạng
