@@ -2,10 +2,17 @@
 các vlan được truy cập server
 	vlan1 management
 	vlan3 developer
+	vlan4 projectmanager
 	vlan5 tester
+	vlan8 itmanager
 	vlan9 TechnicalManager
+	vlan10 ceo
 	ip 172.20.120.0 0.0.0.255 mang cua tester q3
 	ip 172.20.110.0 0.0.0.255 mang cua devloper q3
+các vlan được sử dụng các dịch vụ dns dhcp
+	tất cả vlan
+các vlan được sử dụng các dịch vụ mail ftp http
+	trừ vlan 2 
 các vlan kh được truy cập đến server
 	deny all
 các vlan kh được giao tiếp với vlan1
@@ -15,14 +22,25 @@ permit any
 =========================thực hiện=======================
 =============tren core 1----core 2========================
 ip access-list extended ACL1
-
-permit ip 172.20.20.0 0.0.0.255 172.20.0.0 0.0.0.255
-permit ip 172.20.40.0 0.0.0.255 172.20.0.0 0.0.0.255
-permit ip 172.20.80.0 0.0.0.255 172.20.0.0 0.0.0.255
-permit ip 172.20.120.0 0.0.0.255 172.20.0.0 0.0.0.255
-permit ip 172.20.110.0 0.0.0.255 172.20.0.0 0.0.0.255
-deny ip any 172.20.0.0 0.0.0.255
+permit udp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 67
+permit udp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 68
+permit tcp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 53
+permit udp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 53
 deny ip 172.20.10.0 0.0.0.255 172.0.0.0 0.255.255.255
+permit ip 172.20.20.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit ip 172.20.30.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit ip 172.20.40.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit ip 172.20.70.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit ip 172.20.80.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit ip 172.20.90.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit ip 172.20.120.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit ip 172.20.110.0 0.0.0.255 172.20.0.10 0.0.0.0
+permit tcp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 20
+permit tcp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 21
+permit tcp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 25
+permit tcp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 80
+permit tcp 172.20.0.0 0.0.255.255 172.20.0.10 0.0.0.0 eq 110
+deny ip any 172.20.0.0 0.0.0.255
 permit ip any any
 exit
 int vlan 1
